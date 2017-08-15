@@ -5,6 +5,7 @@
 -- @reference:
 --    https://tools.ietf.org/html/draft-quinn-vxlan-gpe-04
 --    https://tools.ietf.org/html/draft-ietf-sfc-nsh-19
+--    https://www.wireshark.org/docs/wsdg_html_chunked/index.html
 
 -- Glocal variables
 local nproto_table = {
@@ -42,17 +43,17 @@ local md_type_table = {
     [0x1] = "Fixed Length Context Header",
     [0x2] = "Variable Length Context Header"
 }
-f_nsh.ver   = ProtoField.uint16 (NAME .. ".ver",  "Version", base.DEC, nil, 0xC000)
-f_nsh.flags = ProtoField.uint16 (NAME .. ".flags",  "Flags", base.HEX, nil, 0x3FC0)
-f_nsh.len   = ProtoField.uint16 (NAME .. ".len",  "Length", base.DEC, nil, 0x003F)
-f_nsh.md    = ProtoField.uint8  (NAME .. ".md",  "MD Type", base.HEX, md_type_table)
-f_nsh.nproto= ProtoField.uint8  (NAME .. ".nproto",  "Next Protocol", base.HEX, nproto_table)
-f_nsh.spath = ProtoField.uint24 (NAME .. ".spath",  "Service Path", base.DEC)
-f_nsh.sindex= ProtoField.uint8  (NAME .. ".sindex",  "Service Index", base.DEC)
-f_nsh.cxt0  = ProtoField.uint32 (NAME .. ".cxt0",  "Context-0", base.HEX)
-f_nsh.cxt1  = ProtoField.uint32 (NAME .. ".cxt1",  "Context-1", base.HEX)
-f_nsh.cxt2  = ProtoField.uint32 (NAME .. ".cxt2",  "Context-2", base.HEX)
-f_nsh.cxt3  = ProtoField.uint32 (NAME .. ".cxt3",  "Context-3", base.HEX)
+f_nsh.ver   = ProtoField.uint16 (NAME_NSH .. ".ver",  "Version", base.DEC, nil, 0xC000)
+f_nsh.flags = ProtoField.uint16 (NAME_NSH .. ".flags",  "Flags", base.HEX, nil, 0x3FC0)
+f_nsh.len   = ProtoField.uint16 (NAME_NSH .. ".len",  "Length", base.DEC, nil, 0x003F)
+f_nsh.md    = ProtoField.uint8  (NAME_NSH .. ".md",  "MD Type", base.HEX, md_type_table)
+f_nsh.nproto= ProtoField.uint8  (NAME_NSH .. ".nproto",  "Next Protocol", base.HEX, nproto_table)
+f_nsh.spath = ProtoField.uint24 (NAME_NSH .. ".spath",  "Service Path", base.DEC)
+f_nsh.sindex= ProtoField.uint8  (NAME_NSH .. ".sindex",  "Service Index", base.DEC)
+f_nsh.cxt0  = ProtoField.uint32 (NAME_NSH .. ".cxt0",  "Context-0", base.HEX)
+f_nsh.cxt1  = ProtoField.uint32 (NAME_NSH .. ".cxt1",  "Context-1", base.HEX)
+f_nsh.cxt2  = ProtoField.uint32 (NAME_NSH .. ".cxt2",  "Context-2", base.HEX)
+f_nsh.cxt3  = ProtoField.uint32 (NAME_NSH .. ".cxt3",  "Context-3", base.HEX)
 
 -- dissect packet sub-function
 local function nsh_dissector (buf, pinfo, tree)
